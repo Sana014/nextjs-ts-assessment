@@ -12,11 +12,6 @@ declare global {
   }
 }
 
-export const metadata = {
-  title: 'Product Listing App',
-  description: 'A simple CRUD product listing using Next.js and Tailwind CSS',
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [search, setSearch] = React.useState(
     typeof window !== 'undefined' ? window.__searchQuery || '' : ''
