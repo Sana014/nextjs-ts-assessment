@@ -1,9 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ThemeContext } from "./ThemeProvider";
 
 export default function Navbar() {
   const router = useRouter();
+  const { theme, setTheme } = useContext(ThemeContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-primary-light text-primary-dark px-6 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between shadow gap-2">
+    <nav className="w-full bg-primary-light dark:bg-gray-900 text-primary-dark dark:text-gray-100 px-6 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between shadow gap-2">
       <div className="flex items-center gap-4 flex-1">
         <span className="font-bold text-xl tracking-tight">MyProductShelf</span>
       </div>
@@ -81,7 +83,19 @@ export default function Navbar() {
         </div>
       </div>
       <div className="flex items-center gap-4 flex-1 justify-end" ref={dropdownRef}>
-        <a href="/" className="text-primary-dark font-semibold text-base hover:underline">Home</a>
+        <a href="/" className="text-primary-dark dark:text-gray-100 font-semibold text-base hover:underline">Home</a>
+        {/* Theme toggle button */}
+        <button
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          className="px-3 py-2 rounded-lg border border-primary bg-white dark:bg-gray-800 text-primary-dark dark:text-gray-100 hover:bg-primary-light dark:hover:bg-gray-700 transition flex items-center gap-2"
+          aria-label="Toggle theme"
+        >
+          {theme === "light" ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.05l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
+          )}
+        </button>
         <div className="relative">
           <button
             onClick={() => setDropdownOpen((v) => !v)}
