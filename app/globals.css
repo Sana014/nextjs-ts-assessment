@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Optional global styles */
+body {
+  @apply bg-primary-light text-primary-dark font-sans;
+}
+
+a {
+  @apply text-primary hover:underline;
+}
+
+input, textarea {
+  @apply border border-primary rounded p-2 w-full;
+}
+
+button {
+  @apply px-4 py-2 rounded bg-primary-accent text-white font-semibold shadow hover:bg-primary-dark transition;
+}
+
+/* Product image carousel/scrolling styles */
+.product-carousel {
+  @apply relative w-full max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg my-8;
+}
+.product-carousel img {
+  @apply w-full h-64 object-cover transition-transform duration-700 ease-in-out;
+}
+.product-discount-badge {
+  @apply absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10 animate-bounce;
+}
+
+@keyframes scrollImage {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.product-carousel-scroll {
+  animation: scrollImage 8s linear infinite;
+}
